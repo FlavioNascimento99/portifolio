@@ -1,5 +1,5 @@
 import { ArrowUpRight, Code2, Database, Github, Linkedin, Mail, Menu, Server, X } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { NeoBadge, NeoButton, NeoCard } from './components/NeoComponents';
 // import { TerminalChat } from './components/TerminalChat'; // TODO: Desenvolver J-BOT customizado
 import { GITHUB_LINKS, HERO_TEXT, PROJECTS, SKILLS, SUB_HERO_TEXT } from './constants';
@@ -29,7 +29,7 @@ function App() {
     setFeedback(null);
 
     try {
-      const response = await fetch('https://formspree.io/f/xyzabcde', {
+      const response = await fetch('https://formspree.io/f/xreabzqe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
