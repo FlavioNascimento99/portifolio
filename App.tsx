@@ -215,7 +215,7 @@ function App() {
                       onChange={handleInputChange}
                       required
                       className="w-full bg-gray-100 border-4 border-black p-3 font-mono focus:bg-neo-yellow focus:outline-none transition-colors" 
-                      placeholder="John Doe" 
+                      placeholder="Nome do remetente" 
                     />
                 </div>
                 <div className="space-y-2">
@@ -227,7 +227,7 @@ function App() {
                       onChange={handleInputChange}
                       required
                       className="w-full bg-gray-100 border-4 border-black p-3 font-mono focus:bg-neo-yellow focus:outline-none transition-colors" 
-                      placeholder="john@example.com" 
+                      placeholder="email@exemplo.com" 
                     />
                 </div>
              </div>
@@ -240,7 +240,7 @@ function App() {
                   onChange={handleInputChange}
                   required
                   className="w-full bg-gray-100 border-4 border-black p-3 font-mono focus:bg-neo-yellow focus:outline-none transition-colors" 
-                  placeholder="System.out.print(message)..."
+                  placeholder="System.out.print(mensagem)..."
                 ></textarea>
              </div>
              {feedback && (
