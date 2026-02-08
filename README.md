@@ -14,7 +14,7 @@ Um portfólio web em estilo **neobrutal** showcaseando meus projetos e habilidad
 - ⚡ **React 19** com TypeScript
 - 🎯 **Design Responsivo** otimizado para mobile
 - 🎨 **Estilo Neobrutal** com cores vibrantes e borders espessos
-- 💬 **Chat IA** integrado (Gemini)
+- 💬 **Chat IA** integrado (Gemini) **[EM DESENVOLVIMENTO]**
 - 📧 **Formulário de Contato** com Formspree
 - 🔗 **Links diretos** para repositórios GitHub
 - ✨ **Animações suaves** e interações polidas
