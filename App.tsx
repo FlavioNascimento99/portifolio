@@ -1,7 +1,7 @@
 import { ArrowUpRight, Code2, Database, Github, Linkedin, Mail, Menu, Server, X } from 'lucide-react';
 import { useState } from 'react';
 import { NeoBadge, NeoButton, NeoCard } from './components/NeoComponents';
-import { TerminalChat } from './components/TerminalChat';
+// import { TerminalChat } from './components/TerminalChat'; // TODO: Desenvolver J-BOT customizado
 import { GITHUB_LINKS, HERO_TEXT, PROJECTS, SKILLS, SUB_HERO_TEXT } from './constants';
 
 function App() {
@@ -282,7 +282,7 @@ function App() {
       </footer>
 
       {/* Floating Chat Component */}
-      <TerminalChat />
+      {/* <TerminalChat /> TODO: Ativar quando customizar o J-BOT */}
       
       <style>{`
         @keyframes marquee {
