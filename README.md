@@ -96,10 +96,6 @@ npm run preview
 const response = await fetch('https://formspree.io/f/SEU_ID_AQUI', {
 ```
 
-### Gemini API (Chat)
-1. Gere uma API Key em [ai.google.dev](https://ai.google.dev/)
-2. Adicione em [geminiService.ts](services/geminiService.ts)
-
 ## 📁 Estrutura
 
 ```
@@ -113,7 +109,7 @@ src/
 │   ├── TerminalChat.tsx  # Chat IA flutuante
 │   └── ...
 ├── services/
-│   └── geminiService.ts  # Integração Gemini
+
 └── ...
 ```
 

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Terminal, Send, X, Minimize2, Maximize2, Cpu } from 'lucide-react';
-import { ChatMessage } from './types';
-// import { sendMessageStream } from './services/geminiService'; // REMOVIDO: Serviço Gemini desabilitado
+import { ChatMessage } from '../../types';
+// import { sendMessageStream } from '../../services/geminiService'; // REMOVIDO: Serviço Gemini desabilitado
 
 export const TerminalChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

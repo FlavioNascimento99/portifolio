@@ -1,8 +1,17 @@
+export interface ProjectMedia {
+  type: 'image' | 'video';
+  url: string;
+  alt?: string;
+}
+
 export interface Project {
   id: number;
   title: string;
   description: string;
+  fullDescription?: string;
+  subtitle?: string;
   techStack: string[];
+  media?: ProjectMedia[];
   link?: string;
   color: string; // Tailwind color class for bg
 }
