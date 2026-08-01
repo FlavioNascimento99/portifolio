@@ -1,23 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NASCIMENTO.DEV</title>
     <link rel="icon" type="image/png" href="./assets/code.png" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          document.documentElement.dataset.theme = t === 'dark' ? 'dark' : 'light';
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Public+Sans:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
       :root {
-        --color-bg: #e0e7ff;
-        --color-main: #a5b4fc;
-        --shadow-color: #000000;
+        --bg: #0b0e17;
+        --band: #101725;
+        --surface: #161d30;
+        --surface-2: #1e2740;
+        --input: #0d1322;
+        --deep: #05070d;
+        --border: #e9e6ff;
+        --shadow: #e9e6ff;
+        --text: #f4f2ff;
+        --on-surface: #f4f2ff;
+        --muted: #98a0c9;
+        --yellow: #FFD23F;
+        --cyan: #45E6FF;
+        --pink: #FF4FA5;
+        --green: #A8F55E;
+        color-scheme: dark;
+      }
+      html[data-theme="light"] {
+        --bg: #f6f4fb;
+        --band: #eeeaf6;
+        --surface: #ffffff;
+        --surface-2: #f1eef8;
+        --input: #f1eef8;
+        --deep: #000000;
+        --border: #000000;
+        --shadow: #000000;
+        --text: #111111;
+        --on-surface: #111111;
+        --muted: #6b6b7a;
+        --yellow: #FFDE59;
+        --cyan: #5CE1E6;
+        --pink: #FF66C4;
+        --green: #7ED957;
+        color-scheme: light;
       }
       body {
         font-family: 'Public Sans', sans-serif;
-        background-color: #f3f4f6;
+        background-color: var(--bg);
+        color: var(--text);
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Archivo Black', sans-serif;

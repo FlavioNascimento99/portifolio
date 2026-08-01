@@ -21,6 +21,20 @@ export interface Skill {
   items: string[];
 }
 
+export interface Experience {
+  id: number;
+  role: string;
+  company: string;
+  type: string;
+  period: string;
+  duration: string;
+  location: string;
+  logo?: string;
+  description: string;
+  highlights: string[];
+  techStack: string[];
+}
+
 export interface ChatMessage {
   role: 'user' | 'model';
   text: string;

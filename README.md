@@ -28,10 +28,16 @@ Introdução com informações sobre quem sou e minhas principais tecnologias.
 4 projetos principais showcaseando experiência em:
 - **VERITAS** - Aplicação Java/Spring Boot para gestão de processos universitários
 - **Czar Management** - Sistema de gerenciamento em Ruby on Rails
-- **ST Diagnósticos** - Simulação de sistema com Design Patterns
-- **Shoepee** - App mobile Kotlin com Firebase
+- **Broadcast Application** - Plataforma Event-Driven com Pub/Sub em tempo real (React + Node.js + Go)
+- **Elettra Landing Page** - Landing page institucional para Engenharia & Soluções
 
 Cada projeto é **clicável** e leva diretamente ao repositório GitHub.
+
+### Experience (Work_Experience)
+3 experiências em desenvolvimento de software, com logo da empresa, período, descrição, bullets de atividades e stack técnica:
+- **Engenheiro de Software Júnior** - Trads Corretora
+- **Desenvolvedor de Software** - Hospital Napoleão Laureano
+- **Desenvolvedor de Software Freelancer** - 2022 - Atual
 
 ### Skills (O QUE SEI)
 - Com o que escrevo (linguagens)

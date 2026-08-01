@@ -57,7 +57,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
       >
         <div
           className={`
-            bg-white border-4 border-black shadow-neo-lg
+            bg-[var(--surface)] border-4 border-black shadow-neo-lg text-[var(--on-surface)]
             w-full max-w-4xl max-h-[95vh] overflow-hidden
             grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-4 lg:gap-6 p-3 md:p-4 lg:p-6
             transform transition-all duration-300
@@ -77,7 +77,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           <div className="flex flex-col items-center justify-center gap-1 md:gap-2 lg:gap-3 order-2 lg:order-1">
             {currentMedia ? (
               <>
-                <div className="relative w-full aspect-square bg-gray-200 border-4 border-black overflow-hidden max-h-56 md:max-h-72 lg:max-h-full">
+                <div className="relative w-full aspect-square bg-[var(--input)] border-4 border-black overflow-hidden max-h-56 md:max-h-72 lg:max-h-full">
                   {currentMedia.type === 'image' ? (
                     <img
                       src={currentMedia.url}
@@ -121,7 +121,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                         key={index}
                         onClick={() => setCurrentMediaIndex(index)}
                         className={`w-2 h-2 md:w-3 md:h-3 border-2 border-black transition-all ${
-                          index === currentMediaIndex ? 'bg-black' : 'bg-white'
+                          index === currentMediaIndex ? 'bg-[var(--on-surface)]' : 'bg-[var(--surface-2)]'
                         }`}
                       />
                     ))}
@@ -129,8 +129,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                 )}
               </>
             ) : (
-              <div className="w-full aspect-square bg-gray-200 border-4 border-black flex items-center justify-center">
-                <span className="font-mono font-bold text-gray-500 text-xs md:text-sm">Sem mídia</span>
+              <div className="w-full aspect-square bg-[var(--input)] border-4 border-black flex items-center justify-center">
+                <span className="font-mono font-bold text-[var(--muted)] text-xs md:text-sm">Sem mídia</span>
               </div>
             )}
           </div>
@@ -140,7 +140,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
             <div>
               <h2 className="text-sm md:text-base lg:text-xl font-black uppercase mb-1">{project.title}</h2>
               {project.subtitle && (
-                <p className="font-mono text-[0.6rem] md:text-xs lg:text-xs text-gray-600 line-clamp-2">{project.subtitle}</p>
+                <p className="font-mono text-[0.6rem] md:text-xs lg:text-xs text-[var(--muted)] line-clamp-2">{project.subtitle}</p>
               )}
             </div>
 
@@ -152,7 +152,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
 
             <div>
               <h3 className="font-black text-[0.6rem] md:text-xs lg:text-sm uppercase mb-1 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-black flex-shrink-0"></span>
+                <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[var(--on-surface)] flex-shrink-0"></span>
                 Tech
               </h3>
               <div className="flex flex-wrap gap-0.5">
@@ -165,7 +165,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                   </span>
                 ))}
                 {project.techStack.length > 5 && (
-                  <span className="text-[0.5rem] md:text-xs text-gray-600 pt-0">+{project.techStack.length - 5}</span>
+                  <span className="text-[0.5rem] md:text-xs text-[var(--muted)] pt-0">+{project.techStack.length - 5}</span>
                 )}
               </div>
             </div>

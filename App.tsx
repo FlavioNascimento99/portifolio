@@ -1,26 +1,28 @@
-import { ArrowUpRight, Code2, Database, Github, Linkedin, Mail, Menu, Server, X } from 'lucide-react';
-import React, { useState } from 'react';
-import { NeoBadge, NeoButton, NeoCard, ProjectModal } from './components';
+import { ArrowUpRight, Code2, Database, Github, Linkedin, Mail, Moon, Server, Sun } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { NeoBadge, NeoButton, NeoCard, ProjectModal, ScrollReveal, FloatingIcons } from './components';
 import { useRandomPhoto } from './hooks';
 import { Project } from './types';
 // import { TerminalChat } from './components/sections'; // TODO: Desenvolver J-BOT customizado
-import { GITHUB_LINKS, HERO_TEXT, PROJECTS, SKILLS, SUB_HERO_TEXT } from './constants';
+import { GITHUB_LINKS, HERO_TEXT, PROJECTS, SKILLS, SUB_HERO_TEXT, EXPERIENCES } from './constants';
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const saved = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
+    return saved === 'dark' ? 'dark' : 'light';
+  });
   const randomPhotoUrl = useRandomPhoto();
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -59,74 +61,44 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f0f0f0] text-black overflow-x-hidden selection:bg-neo-pink selection:text-white">
+    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] overflow-x-hidden selection:bg-neo-pink selection:text-black">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full bg-white border-b-4 border-black z-40 px-3 md:px-8 py-3 md:py-4 flex justify-between items-center">
-        <div className="font-black text-sm md:text-xl lg:text-2xl tracking-tighter flex items-center gap-1 md:gap-2">
-           <div className="w-6 h-6 md:w-8 md:h-8 bg-neo-black text-white flex items-center justify-center border-2 border-neo-green shadow-neo-sm text-xs md:text-base">
+      <nav className="fixed top-0 left-0 w-full bg-neo-black border-b-4 border-neo-yellow z-40 py-3 md:py-4 flex justify-center items-center shadow-neo-sm">
+        <button
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
+          className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 flex items-center gap-1 md:gap-2 bg-white text-black border-2 border-black px-2 md:px-3 py-1 shadow-neo-sm font-mono font-bold text-[0.6rem] md:text-xs uppercase"
+        >
+          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          <span className="hidden sm:inline">{theme === 'dark' ? 'LIGHT' : 'DARK'}</span>
+        </button>
+        <div className="font-black text-sm md:text-xl lg:text-2xl tracking-tighter flex items-center gap-1 md:gap-2 text-[var(--text)]">
+           <div className="w-6 h-6 md:w-8 md:h-8 bg-neo-yellow text-black flex items-center justify-center border-2 border-black shadow-neo-sm text-xs md:text-base">
              {`{}`}
            </div>
            <span className="hidden sm:inline">NASCIMENTO.DEV</span>
            <span className="sm:hidden">NAÇ.DEV</span>
         </div>
-        
-        {/* Desktop Menu */}
-        <div className="hidden md:flex gap-4 lg:gap-6 font-mono font-bold text-xs lg:text-sm">
-          {['ABOUT', 'PROJECTS', 'SKILLS', 'CONTACT'].map((item) => (
-            <button 
-              key={item}
-              onClick={() => scrollToSection(item.toLowerCase())}
-              className="hover:underline decoration-4 decoration-neo-pink underline-offset-4"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile Toggle */}
-        <button 
-          className="md:hidden border-2 border-black p-1 shadow-neo-sm active:shadow-none active:translate-x-1 active:translate-y-1 transition-all"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-neo-yellow z-30 flex flex-col items-center justify-center gap-8 font-black text-4xl">
-          {['ABOUT', 'PROJECTS', 'SKILLS', 'CONTACT'].map((item) => (
-            <button 
-              key={item}
-              onClick={() => scrollToSection(item.toLowerCase())}
-              className="hover:text-white hover:bg-black px-4 transform rotate-[-2deg] hover:rotate-2 transition-all border-4 border-transparent hover:border-white"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-      )}
-
       {/* Hero Section */}
-      <section id="about" className="pt-20 pb-8 md:pt-32 md:pb-20 px-4 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row gap-6 md:gap-12 items-center">
-        <div className="flex-1 space-y-6 w-full">
-          <div className="inline-block bg-neo-pink border-2 border-black px-3 py-1 font-mono font-bold text-xs md:text-sm shadow-neo-sm transform -rotate-1">
+      <section id="about" className="relative overflow-hidden pt-20 pb-8 md:pt-32 md:pb-20 min-h-[85vh] flex items-center">
+        <FloatingIcons />
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 flex flex-col md:flex-row gap-6 md:gap-12 items-center">
+        <ScrollReveal direction="left" className="flex-1 space-y-6 w-full">
+          <div className="inline-block bg-neo-pink text-black border-2 border-black px-3 py-1 font-mono font-bold text-xs md:text-sm shadow-neo-sm transform -rotate-1">
             v0.0.3 RELEASE
           </div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black leading-tight md:leading-none uppercase break-words drop-shadow-[2px_2px_0_rgba(0,0,0,1)] md:drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black leading-tight md:leading-none uppercase break-words text-[var(--text)] drop-shadow-[2px_2px_0_var(--pink)] md:drop-shadow-[4px_4px_0_var(--pink)]">
             {HERO_TEXT}
           </h1>
-          <p className="font-mono text-sm sm:text-base md:text-lg lg:text-xl bg-white border-2 border-black p-3 md:p-4 shadow-neo max-w-2xl">
+          <p className="font-mono text-sm sm:text-base md:text-lg lg:text-xl bg-white text-black border-2 border-black p-3 md:p-4 shadow-neo max-w-2xl">
             {SUB_HERO_TEXT}
           </p>
-          <div className="flex gap-2 md:gap-4 pt-4 flex-wrap">
-            <NeoButton onClick={() => scrollToSection('projects')}>O que já fiz?</NeoButton>
-            <NeoButton variant="secondary" onClick={() => scrollToSection('contact')}>Me Contate</NeoButton>
-          </div>
-        </div>
+        </ScrollReveal>
         
         {/* Photo Section */}
-        <div className="w-full md:w-1/3 flex justify-center mt-8 md:mt-0">
+        <ScrollReveal direction="right" delay={150} className="w-full md:w-1/3 flex justify-center mt-8 md:mt-0">
            <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-80 md:h-80">
               <div className="absolute inset-0 border-4 border-black z-10 overflow-hidden shadow-neo-lg">
                  {randomPhotoUrl && (
@@ -138,78 +110,155 @@ function App() {
                  )}
               </div>
               <div className="absolute inset-0 bg-neo-yellow border-4 border-black z-0 translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4"></div>
-              <div className="absolute -top-4 -right-4 md:-top-6 md:-right-6 bg-white border-4 border-black p-2 z-20 shadow-neo font-mono font-bold text-xs md:text-sm animate-bounce">
+              <div className="absolute -top-4 -right-4 md:-top-6 md:-right-6 bg-white text-black border-4 border-black p-2 z-20 shadow-neo font-mono font-bold text-xs md:text-sm animate-bounce">
                 System.out.println("Opa, bão?!");
               </div>
-           </div>
+            </div>
+        </ScrollReveal>
         </div>
       </section>
 
-      <div className="border-t-4 border-black bg-neo-black text-white overflow-hidden py-2 md:py-3 font-mono text-xs md:text-sm lg:text-base font-bold">
+      <div className="border-y-4 border-black bg-neo-yellow text-black overflow-hidden py-2 md:py-3 font-mono text-xs md:text-sm lg:text-base font-bold">
         <div className="whitespace-nowrap animate-marquee">
-          JAVA • SPRING BOOT • MICROSERVICES • KOTLIN • ANGULAR • FIREBASE • NODEJS • DESIGN PATTERN • TAILWINDCSS • SQLITE • C# • RUBY • ON RAILS • JETPACK COMPOSE • POSTGRESQL • AWS • ASP.NET • DJANGO • DOCKER • GIT • MAVEN • GRADLE • INTELLIJ IDEA • JIRA • POSTMAN • WSL • ANDROID STUDIO • FIGMA • ARCH LINUX
+          <span className="inline-block">JAVA • SPRING BOOT • MICROSERVICES • KOTLIN • ANGULAR • FIREBASE • NODEJS • DESIGN PATTERN • TAILWINDCSS • SQLITE • C# • RUBY • ON RAILS • JETPACK COMPOSE • POSTGRESQL • AWS • ASP.NET • DJANGO • DOCKER • GIT • MAVEN • GRADLE • INTELLIJ IDEA • JIRA • POSTMAN • WSL • ANDROID STUDIO • FIGMA • ARCH LINUX</span><span className="inline-block"> JAVA • SPRING BOOT • MICROSERVICES • KOTLIN • ANGULAR • FIREBASE • NODEJS • DESIGN PATTERN • TAILWINDCSS • SQLITE • C# • RUBY • ON RAILS • JETPACK COMPOSE • POSTGRESQL • AWS • ASP.NET • DJANGO • DOCKER • GIT • MAVEN • GRADLE • INTELLIJ IDEA • JIRA • POSTMAN • WSL • ANDROID STUDIO • FIGMA • ARCH LINUX</span>
         </div>
       </div>
 
       {/* Skills Section */}
       <section id="skills" className="py-12 md:py-20 px-4 md:px-12 max-w-7xl mx-auto">
-        <div className="flex items-end gap-3 md:gap-4 mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl lg:text-6xl font-black uppercase">O QUE SEI</h2>
-            <div className="h-4 flex-1 bg-black mb-4 hidden md:block"></div>
-        </div>
+        <ScrollReveal direction="up" className="flex items-end gap-3 md:gap-4 mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl lg:text-6xl font-black uppercase bg-neo-yellow text-black border-4 border-black px-3 py-2 inline-block shadow-neo transform -rotate-1">O QUE SEI</h2>
+            <div className="h-4 flex-1 bg-[var(--on-surface)] mb-4 hidden md:block"></div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {SKILLS.map((skillGroup) => (
-            <NeoCard key={skillGroup.category} className="h-full" color="bg-white">
-              <div className="border-b-4 border-black pb-2 mb-3 md:mb-4 flex items-center justify-between">
-                <h3 className="font-black text-sm md:text-lg lg:text-xl">{skillGroup.category}</h3>
-                {skillGroup.category === 'CORE' && <Code2 size={20} />}
-                {skillGroup.category === 'INFRA' && <Server size={20} />}
-                {skillGroup.category === 'FRAMEWORKS' && <Code2 size={20} />}
-                {skillGroup.category === 'TOOLS' && <Database size={20} />}
-              </div>
-              <ul className="space-y-1 md:space-y-2 font-mono text-xs md:text-sm">
-                {skillGroup.items.map(item => (
-                  <li key={item} className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-black"></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </NeoCard>
+          {SKILLS.map((skillGroup, index) => (
+            <ScrollReveal key={skillGroup.category} direction="up" delay={index * 100} className="h-full">
+              <NeoCard className="h-full" color="bg-[var(--surface)]">
+                <div className="border-b-4 border-black pb-2 mb-3 md:mb-4 flex items-center justify-between">
+                  <h3 className="font-black text-sm md:text-lg lg:text-xl">{skillGroup.category}</h3>
+                  {skillGroup.category === 'CORE' && <Code2 size={20} />}
+                  {skillGroup.category === 'INFRA' && <Server size={20} />}
+                  {skillGroup.category === 'FRAMEWORKS' && <Code2 size={20} />}
+                  {skillGroup.category === 'TOOLS' && <Database size={20} />}
+                </div>
+                <ul className="space-y-1 md:space-y-2 font-mono text-xs md:text-sm">
+                  {skillGroup.items.map(item => (
+                    <li key={item} className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-[var(--on-surface)]"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </NeoCard>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-12 md:py-20 bg-neo-blue border-y-4 border-black">
+      {/* Experience Section */}
+      <section id="experience" className="py-12 md:py-20 bg-[var(--band)] border-y-4 border-neo-pink">
         <div className="px-4 md:px-12 max-w-7xl mx-auto">
-          <div className="bg-white border-3 border-black p-2 inline-block shadow-neo mb-6 md:mb-8 transform -rotate-1">
-            <h2 className="text-base sm:text-xl md:text-4xl lg:text-6xl xl:text-7xl font-black uppercase">Deployed_Modules</h2>
-          </div>
+          <ScrollReveal direction="up" className="bg-neo-pink text-black border-4 border-black p-2 inline-block shadow-neo mb-6 md:mb-8 transform rotate-1">
+            <h2 className="text-base sm:text-xl md:text-4xl lg:text-6xl font-black uppercase">Work_Experience</h2>
+          </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
-            {PROJECTS.map((project) => (
-              <button 
-                key={project.id} 
-                onClick={() => setSelectedProject(project)}
-                className="no-underline text-left"
-              >
-                <NeoCard color={project.color} className="relative group cursor-pointer h-full hover:shadow-neo-lg transition-shadow">
-                  <div className="absolute top-4 right-4 bg-white border-2 border-black p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight size={24} />
-                  </div>
-                  <h3 className="text-lg md:text-2xl lg:text-3xl font-black mb-3 pr-8">{project.title}</h3>
-                  <p className="font-mono text-xs md:text-sm lg:text-base mb-4 md:mb-6 border-l-4 border-black pl-3 bg-white/50 py-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.techStack.map(tech => (
-                      <NeoBadge key={tech} label={tech} color="bg-white" />
-                    ))}
+          <div className="space-y-6 md:space-y-8">
+            {EXPERIENCES.map((exp, index) => (
+              <ScrollReveal key={exp.id} direction={index % 2 === 0 ? 'left' : 'right'} className="w-full">
+                <NeoCard color="bg-[var(--surface)]" className="relative">
+                  <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+                    {/* Logo */}
+                    <div className="flex-shrink-0 flex flex-row md:flex-col items-center gap-3 md:gap-2">
+                      {exp.logo ? (
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-[var(--surface)] border-4 border-black shadow-neo-sm flex items-center justify-center overflow-hidden p-1">
+                          <img src={exp.logo} alt={`${exp.company} logo`} className="w-full h-full object-contain" />
+                        </div>
+                      ) : (
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-neo-black border-4 border-black shadow-neo-sm flex items-center justify-center text-white font-black">
+                          {`{}`}
+                        </div>
+                      )}
+                      <span className="bg-neo-blue border-2 border-black px-2 py-1 font-mono text-[0.6rem] md:text-xs font-bold shadow-neo-sm">
+                        {exp.type}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+                        <div>
+                          <h3 className="text-lg md:text-2xl lg:text-3xl font-black uppercase">{exp.role}</h3>
+                          <p className="font-mono font-bold text-xs md:text-sm">{exp.company}</p>
+                          <p className="font-mono text-[0.65rem] md:text-xs text-[var(--muted)]">{exp.location}</p>
+                        </div>
+                        <div className="flex flex-col items-end gap-1">
+                          <span className="bg-neo-yellow border-2 border-black px-2 py-1 font-mono text-[0.6rem] md:text-xs font-bold shadow-neo-sm">
+                            {exp.period}
+                          </span>
+                          <span className="bg-neo-green border-2 border-black px-2 py-1 font-mono text-[0.6rem] md:text-xs font-bold shadow-neo-sm">
+                            {exp.duration}
+                          </span>
+                        </div>
+                      </div>
+
+                      <p className="font-mono text-xs md:text-sm leading-relaxed border-l-4 border-black pl-3 bg-[var(--surface-2)] py-2 mb-3">
+                        {exp.description}
+                      </p>
+
+                      <ul className="space-y-2 mb-3">
+                        {exp.highlights.map(item => (
+                          <li key={item} className="flex items-start gap-2 font-mono text-xs md:text-sm">
+                            <span className="w-2 h-2 bg-[var(--on-surface)] mt-1.5 flex-shrink-0"></span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="flex flex-wrap gap-2">
+                        {exp.techStack.map(tech => (
+                          <NeoBadge key={tech} label={tech} color="bg-neo-yellow" />
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </NeoCard>
-              </button>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-12 md:py-20 bg-[var(--band)] border-y-4 border-neo-blue">
+        <div className="px-4 md:px-12 max-w-7xl mx-auto">
+          <ScrollReveal direction="up" className="bg-neo-blue text-black border-4 border-black p-2 inline-block shadow-neo mb-6 md:mb-8 transform -rotate-1">
+            <h2 className="text-base sm:text-xl md:text-4xl lg:text-6xl xl:text-7xl font-black uppercase">Deployed_Modules</h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+            {PROJECTS.map((project, index) => (
+              <ScrollReveal key={project.id} direction="up" delay={(index % 2) * 100} className="h-full">
+                <button 
+                  onClick={() => setSelectedProject(project)}
+                  className="no-underline text-left w-full h-full"
+                >
+                  <NeoCard color={project.color} className="relative group cursor-pointer h-full hover:shadow-neo-lg transition-shadow">
+                    <div className="absolute top-4 right-4 bg-white border-2 border-black p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ArrowUpRight size={24} />
+                    </div>
+                    <h3 className="text-lg md:text-2xl lg:text-3xl font-black mb-3 pr-8">{project.title}</h3>
+                    <p className="font-mono text-xs md:text-sm lg:text-base mb-4 md:mb-6 border-l-4 border-black pl-3 bg-[var(--surface-2)] py-2">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {project.techStack.map(tech => (
+                        <NeoBadge key={tech} label={tech} color="bg-white" />
+                      ))}
+                    </div>
+                  </NeoCard>
+                </button>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -217,8 +266,9 @@ function App() {
 
       {/* Contact Section */}
       <section id="contact" className="py-12 md:py-20 px-4 md:px-12 max-w-4xl mx-auto text-center">
-        <h2 className="text-2xl md:text-4xl lg:text-6xl font-black mb-6 md:mb-8 uppercase">Execute_Contact</h2>
-        <div className="bg-white border-4 border-black p-4 md:p-8 shadow-neo-lg text-left">
+        <ScrollReveal direction="up">
+          <h2 className="text-2xl md:text-4xl lg:text-6xl font-black uppercase bg-neo-green text-black border-4 border-black px-3 py-2 inline-block shadow-neo transform rotate-1 mb-6 md:mb-8">Execute_Contact</h2>
+          <div className="bg-white text-black border-4 border-black p-4 md:p-8 shadow-neo-lg text-left">
            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
@@ -284,10 +334,11 @@ function App() {
            <a href="https://www.linkedin.com/in/0xnascimento/" target="_blank" rel="noopener noreferrer" className="bg-neo-blue text-black p-2 md:p-4 border-4 border-black hover:translate-y-[-5px] transition-all shadow-neo">
               <Linkedin size={24} className="md:w-8 md:h-8" />
            </a>
-           <a href="mailto:contato.nascimento.dev@gmail.com" className="bg-neo-green text-black p-2 md:p-4 border-4 border-black hover:translate-y-[-5px] transition-all shadow-neo">
-              <Mail size={24} className="md:w-8 md:h-8" />
-           </a>
-        </div>
+            <a href="mailto:contato.nascimento.dev@gmail.com" className="bg-neo-green text-black p-2 md:p-4 border-4 border-black hover:translate-y-[-5px] transition-all shadow-neo">
+               <Mail size={24} className="md:w-8 md:h-8" />
+            </a>
+         </div>
+        </ScrollReveal>
       </section>
 
       {/* Footer */}
@@ -314,6 +365,44 @@ function App() {
         .animate-marquee {
           animation: marquee 20s linear infinite;
         }
+
+        .reveal {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.7s ease, transform 0.7s ease;
+          will-change: opacity, transform;
+        }
+        .reveal.is-visible {
+          opacity: 1;
+          transform: translate(0, 0);
+        }
+        .reveal-from-up { transform: translateY(40px); }
+        .reveal-from-down { transform: translateY(-40px); }
+        .reveal-from-left { transform: translateX(-60px); }
+        .reveal-from-right { transform: translateX(60px); }
+        .reveal-from-up.is-visible,
+        .reveal-from-down.is-visible,
+        .reveal-from-left.is-visible,
+        .reveal-from-right.is-visible {
+          transform: translate(0, 0);
+        }
+
+        .bg-neo-yellow { background-color: var(--yellow); }
+        .bg-neo-blue { background-color: var(--cyan); }
+        .bg-neo-pink { background-color: var(--pink); }
+        .bg-neo-green { background-color: var(--green); }
+        .bg-neo-black { background-color: var(--surface); }
+        .border-neo-yellow { border-color: var(--yellow); }
+        .border-neo-blue { border-color: var(--cyan); }
+        .border-neo-pink { border-color: var(--pink); }
+        .border-neo-green { border-color: var(--green); }
+        .border-black { border-color: var(--border); }
+        .bg-black { background-color: var(--deep); }
+        .bg-gray-100 { background-color: var(--input); }
+        .text-gray-500, .text-gray-600 { color: var(--muted); }
+        .shadow-neo { box-shadow: 5px 5px 0 0 var(--shadow); }
+        .shadow-neo-sm { box-shadow: 3px 3px 0 0 var(--shadow); }
+        .shadow-neo-lg { box-shadow: 8px 8px 0 0 var(--shadow); }
       `}</style>
     </div>
   );

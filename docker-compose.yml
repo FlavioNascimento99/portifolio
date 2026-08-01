@@ -1,0 +1,24 @@
+services:
+  dev:
+    build:
+      context: .
+      target: dev
+    container_name: portifolio-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+  prod:
+    build:
+      context: .
+      target: prod
+      args:
+        GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    container_name: portifolio-prod
+    ports:
+      - "8080:80"
