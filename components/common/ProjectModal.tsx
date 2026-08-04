@@ -68,7 +68,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 md:top-4 md:right-4 bg-neo-pink border-2 border-black p-1 md:p-2 hover:shadow-none shadow-neo transition-all z-10"
+            className="absolute top-2 right-2 md:top-4 md:right-4 bg-neo-pink text-black border-2 border-black p-1 md:p-2 hover:shadow-none shadow-neo transition-all z-10"
           >
             <X size={20} className="md:w-6 md:h-6" />
           </button>
@@ -82,6 +82,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                     <img
                       src={currentMedia.url}
                       alt={currentMedia.alt || project.title}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   ) : (
@@ -98,14 +99,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                   <div className="flex gap-1 w-full">
                     <button
                       onClick={prevMedia}
-                      className="flex-1 bg-neo-blue border-2 border-black p-0.5 md:p-1 hover:shadow-none shadow-neo transition-all active:shadow-none flex items-center justify-center gap-0.5 font-mono font-bold text-[0.6rem] md:text-xs"
+                      className="flex-1 bg-neo-blue text-black border-2 border-black p-0.5 md:p-1 hover:shadow-none shadow-neo transition-all active:shadow-none flex items-center justify-center gap-0.5 font-mono font-bold text-[0.6rem] md:text-xs"
                     >
                       <ChevronLeft size={14} className="md:w-4 md:h-4" />
                       <span className="hidden sm:inline">Ant</span>
                     </button>
                     <button
                       onClick={nextMedia}
-                      className="flex-1 bg-neo-blue border-2 border-black p-0.5 md:p-1 hover:shadow-none shadow-neo transition-all active:shadow-none flex items-center justify-center gap-0.5 font-mono font-bold text-[0.6rem] md:text-xs"
+                      className="flex-1 bg-neo-blue text-black border-2 border-black p-0.5 md:p-1 hover:shadow-none shadow-neo transition-all active:shadow-none flex items-center justify-center gap-0.5 font-mono font-bold text-[0.6rem] md:text-xs"
                     >
                       <span className="hidden sm:inline">Prox</span>
                       <ChevronRight size={14} className="md:w-4 md:h-4" />
@@ -159,7 +160,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                 {project.techStack.slice(0, 5).map((tech) => (
                   <span
                     key={tech}
-                    className="inline-block bg-neo-yellow border-2 border-black px-1 md:px-1.5 lg:px-2 py-0 md:py-0.5 font-mono text-[0.5rem] md:text-xs lg:text-xs font-bold shadow-neo-sm"
+                    className="inline-block bg-neo-yellow text-black border-2 border-black px-1 md:px-1.5 lg:px-2 py-0 md:py-0.5 font-mono text-[0.5rem] md:text-xs lg:text-xs font-bold shadow-neo-sm"
                   >
                     {tech}
                   </span>
@@ -176,13 +177,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-                  bg-neo-green border-4 border-black px-2 md:px-3 lg:px-4 py-0.5 md:py-1 lg:py-2
+                  bg-neo-green text-black border-4 border-black px-2 md:px-3 lg:px-4 py-0.5 md:py-1 lg:py-2
                   font-mono font-bold uppercase text-[0.6rem] md:text-xs lg:text-xs
                   shadow-neo hover:shadow-none transition-all active:shadow-none
                   text-center block
                 "
               >
-                GitHub →
+                {project.link ? 'Ver site →' : 'GitHub →'}
               </a>
             )}
           </div>

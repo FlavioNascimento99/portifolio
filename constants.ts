@@ -3,6 +3,20 @@ import { Experience, Project, Skill } from './types';
 export const HERO_TEXT = "DESENVOLVEDOR DE SOFTWARE FULLSTACK.";
 export const SUB_HERO_TEXT = "DESENVOLVEDOR JAVA // SPRING BOOT // POSTGRESQL // WEB DEVELOPMENT // DESIGN DE SOFTWARE";
 
+export const NAV_LINKS: { href: string; label: string }[] = [
+  { href: '#about', label: 'about' },
+  { href: '#skills', label: 'skills' },
+  { href: '#experience', label: 'experience' },
+  { href: '#projects', label: 'projects' },
+  { href: '#contact', label: 'contact' },
+];
+
+export const ABOUT_TEXT = [
+  "Entrei em Sistemas para Internet no Instituto Federal em 2019 sem saber muito bem onde ia parar — mas o primeiro contato profissional, ainda cedo, veio através de HTML/CSS, e foi o suficiente pra virar paixão. Desde então sempre puxei mais pro front-end, pelo gosto de transformar interface em experiência de verdade, e ainda na graduação comecei a pegar freelas pra pequenos e médios negócios, aprendendo a tocar um projeto sozinho, do briefing até o deploy.",
+  "Com o tempo, essa curiosidade foi puxando pro resto da stack. Hoje penso em software de ponta a ponta: gosto de entender o cenário e desenhar a arquitetura antes de sair codando, e é isso que guia meu trabalho — seja reconstruindo a identidade visual de sistemas internos, refatorando monólitos antigos rumo a microsserviços, ou desenhando workers, gateways e integrações com IA que sustentam operações inteiras por trás dos panos.",
+  "No fim, o que não mudou desde 2019 foi o gosto por pegar um problema real e ir até o fim dele — do primeiro esboço em HTML até um sistema em produção, sozinho ou em time.",
+];
+
 export const PROJECTS: Project[] = [
   {
     id:           1,
@@ -97,6 +111,7 @@ export const PROJECTS: Project[] = [
     id:           4,
     title:        "Elettra Landing Page",
     subtitle:     "Landing Page ELETTRA Engenharia & Soluções",
+    link:         "https://elettraengenharia.com.br/",
     description:  "Landing page institucional desenvolvida para a ELETTRA Engenharia & Soluções (João Pessoa - PB). Apresenta serviços de engenharia elétrica, subestações, redes de distribuição, energia fotovoltaica, obras civis e segurança do trabalho.",
     fullDescription: "Elettra Landing Page é uma landing page institucional moderna, construída com React, TypeScript e Tailwind CSS. O projeto apresenta de forma elegante os serviços da empresa, incluindo engenharia elétrica (projetos residenciais e industriais, redes MT/BT, subestações), energia fotovoltaica, obras civis, testes e ensaios em equipamentos e segurança do trabalho. Utiliza Framer Motion para animações suaves, formulário de contato integrado com backend serverless para envio de e-mails e botão flutuante de WhatsApp. O deploy é feito na Vercel, com configuração de e-mails e testes documentados.",
     techStack:    [
@@ -126,35 +141,38 @@ export const GITHUB_LINKS: Record<number, string> = {
   1: "https://github.com/FlavioNascimento99/veritas_application",
   2: "https://github.com/FlavioNascimento99/czar_management",
   3: "https://github.com/FlavioNascimento99/broadcast_application",
-  4: "https://github.com/FlavioNascimento99/elettra-landing-page",
 };
 
 export const EXPERIENCES: Experience[] = [
   {
     id: 1,
-    role: "Engenheiro de Software Júnior",
+    role: "Desenvolvedor de Software Júnior",
     company: "Trads Corretora",
     type: "Tempo integral",
     period: "mar de 2026 - o momento",
     duration: "6 meses",
     location: "João Pessoa, Paraíba, Brasil · No local",
     logo: "https://tradscorretora.com/wp-content/uploads/2025/12/logo-trads.png",
-    description: "Trabalho como desenvolvedor de software com foco em pensar bem a solução antes de sair codando — entender o cenário, desenhar a arquitetura e só depois partir para a implementação. Isso evita retrabalho e deixa o sistema mais organizado e fácil de escalar. No dia a dia, atuo bastante em refatoração e manutenção de sistemas existentes, sempre buscando deixar o código um pouco melhor do que encontrei. Tenho boa vivência com arquitetura de microsserviços, usando Docker e Kubernetes para gerenciar ambientes distribuídos.",
+    summary: "Arquitetura hexagonal, blue-green deploy e automações que sustentam a operação por trás dos panos.",
+    description: "Trabalho como desenvolvedor de software com foco em pensar bem a solução antes de sair codando — entender o cenário, desenhar a arquitetura hexagonal e só depois partir para a implementação. Isso evita retrabalho e deixa o sistema mais organizado e fácil de escalar. Sustento boa parte da operação por trás dos panos: workers, gateways de dados e integrações com IA, sempre com deploy em blue-green sobre Docker e Kubernetes.",
     highlights: [
-      "Desenvolvimento e manutenção de aplicações distribuídas em microsserviços, pensando sempre em escalabilidade e independência entre os serviços.",
-      "Aplicação de padrões de arquitetura e design patterns em projetos de diferentes escopos, buscando baixo acoplamento, testabilidade e facilidade na integração com serviços externos.",
-      "Implementação e configuração de pipelines de CI/CD, automatizando build, testes e deploy para entregar com mais velocidade e confiabilidade.",
+      "Manutenção de sistemas com arquitetura hexagonal e blue-green deployment sobre Docker e Kubernetes, priorizando baixo acoplamento e deploys sem downtime.",
+      "Desenvolvimento de workers responsáveis por manter sistemas próprios e de terceiros atualizados, com uma API própria centralizando a consulta de dados em massa.",
+      "Construção de um sistema de campanhas que orquestra contato em massa com clientes, contextualizado a partir do objetivo definido em cada campanha.",
+      "Desenvolvimento de um gateway que distribui dados externos igualmente entre as plataformas que precisam deles.",
+      "Criação de uma skill multi-agente que consulta dados de reuniões e transforma essas conversas em estratégias de comunicação com clientes.",
       "Gerenciamento de repositórios no GitHub — organização de branches, code review e padronização de fluxo de trabalho seguindo Git Flow.",
     ],
     techStack: [
-      "Microservices",
+      "Hexagonal Architecture",
+      "Blue-Green Deploy",
       "Docker",
       "Kubernetes",
-      "CI/CD",
+      "Fastify",
+      "PostgreSQL",
+      "Redis",
+      "OpenAI & Claude APIs",
       "Git Flow",
-      "Design Patterns",
-      "Code Review",
-      "Github Actions",
     ],
   },
   {
@@ -166,11 +184,13 @@ export const EXPERIENCES: Experience[] = [
     duration: "1 ano 9 meses",
     location: "João Pessoa, Paraíba, Brasil · No local",
     logo: "https://hlaureano.org.br/wp-content/uploads/2016/04/logo_hospital.png",
-    description: "Planejo e construo soluções em software com uso de tecnologias como Django e Flask, juntamente com JavaScript e bibliotecas de estilização de interfaces web como Tailwind e Bootstrap, aplicando conceitos sólidos de UI e UX design e desenvolvendo soluções com uso de design patterns e estruturas de dados — trazendo resultados performáticos e uma notória melhora na experiência geral do usuário.",
+    summary: "Sistemas internos e identidade visual pro hospital, migrando monólitos pra microsserviços.",
+    description: "Planejo e construo soluções em software alternando entre Django e Flask conforme a necessidade de cada aplicação, com JavaScript e bibliotecas de estilização de interfaces web como Tailwind e Bootstrap, aplicando conceitos sólidos de UI e UX design e desenvolvendo soluções com uso de design patterns e estruturas de dados — trazendo resultados performáticos e uma notória melhora na experiência geral do usuário.",
     highlights: [
-      "Implementei um novo padrão de interface nas principais aplicações de acesso administrativo do hospital.",
+      "Reconstruí a identidade visual das principais aplicações de acesso administrativo do hospital.",
+      "Desenvolvi sistemas pros mais variados setores, de dashboards de busca de dados a aplicações que mudavam o fluxo de trabalho de cada equipe.",
+      "Refatorei monólitos antigos, migrando pra uma arquitetura baseada em microsserviços e documentando tudo pra facilitar manutenções futuras.",
       "Trabalhei na refatoração de métodos complexos com múltiplas tarefas, modularizando-os e tornando-os mais manuteníveis.",
-      "Desenvolvi e implementei funções em aplicações web de acesso interno do hospital, trazendo facilidade na consulta de dados sensíveis e dinamizando o trabalho dos mais variados setores.",
     ],
     techStack: [
       "Python",
@@ -192,6 +212,7 @@ export const EXPERIENCES: Experience[] = [
     period: "2022 - Atual",
     duration: "4 anos",
     location: "Remoto",
+    summary: "Aplicações completas do briefing ao deploy, com Java, Spring Boot e Kubernetes.",
     description: "Atuo como desenvolvedor de software freelancer, acompanhando projetos do levantamento de requisitos à entrega final. Desenvolvo aplicações web completas com Java Spring Boot e PostgreSQL, realizando deploy em servidores VPS com Nginx e containerização via Docker e Kubernetes. Além do desenvolvimento, cuido diretamente da negociação de valores e prazos com clientes, garantindo entregas alinhadas às expectativas e suporte contínuo.",
     highlights: [
       "Desenvolvimento de aplicações web completas com Java e Spring Boot, do modelo de dados à API REST, incluindo autenticação e autorização com Spring Security.",
@@ -218,18 +239,18 @@ export const EXPERIENCES: Experience[] = [
 export const SKILLS: Skill[] = [
   {
     category:   "Com o que escrevo...",
-    items: ["Java 17/21", "Node", "Python", "Ruby", "Kotlin", "C#"]
+    items: ["Java 17/21", "Node", "Python", "Ruby", "Kotlin", "C#", "TypeScript"]
   },
   {
     category:   "O que acelera meus projetos...",
-    items: ["Spring Boot",  "On Rails", "ExpressJS", "Django", "ASP.NET", "Angular", "React", "Tailwind CSS" ]
+    items: ["Spring Boot",  "On Rails", "ExpressJS", "Django", "ASP.NET", "Angular", "React", "Tailwind CSS", "Next.js", "Fastify", "FastAPI" ]
   },
   {
     category:   "Como guardo meus dados...",
-    items: ["PostgreSQL", "SQLite", "Firebase", "MySQL", ]
+    items: ["PostgreSQL", "SQLite", "Firebase", "MySQL", "Redis", "ChromaDB", "Prisma"]
   },
   {
     category:   "Ferramentas que domino...",
-    items: ["Maven", "Gradle", "Git", "NPM", "Postman", "Docker", "WSL", "Arch Linux"]
+    items: ["Maven", "Gradle", "Git", "NPM", "Postman", "Docker", "WSL", "Arch Linux", "Kubernetes", "Twilio", "OpenAI & Claude APIs"]
   }
 ];

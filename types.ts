@@ -30,6 +30,7 @@ export interface Experience {
   duration: string;
   location: string;
   logo?: string;
+  summary: string;
   description: string;
   highlights: string[];
   techStack: string[];
