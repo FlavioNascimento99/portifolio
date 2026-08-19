@@ -13,7 +13,13 @@ export interface Project {
   techStack: string[];
   media?: ProjectMedia[];
   link?: string;
+  access?: ProjectAccess;
   color: string; // Tailwind color class for bg
+}
+
+export interface ProjectAccess {
+  kind: 'private';
+  note: string;
 }
 
 export interface Skill {

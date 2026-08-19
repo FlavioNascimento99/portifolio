@@ -171,6 +171,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
               </div>
             </div>
 
+            {project.access && (
+              <div
+                className="
+                  bg-[var(--surface-2)] border-4 border-black px-2 md:px-3 lg:px-4 py-0.5 md:py-1 lg:py-2
+                  font-mono uppercase text-[0.6rem] md:text-xs lg:text-xs text-center
+                "
+              >
+                <span className="font-bold">Sistema proprietario</span>
+                <span className="text-[var(--muted)]"> — {project.access.note}</span>
+              </div>
+            )}
+
             {(project.link || GITHUB_LINKS[project.id]) && (
               <a
                 href={project.link || GITHUB_LINKS[project.id]}
