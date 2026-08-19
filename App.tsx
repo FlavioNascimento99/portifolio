@@ -364,6 +364,11 @@ function App() {
                     <div className="absolute top-4 right-4 bg-white text-black border-2 border-black p-1 rounded-full opacity-60 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                         <ArrowUpRight size={24} />
                     </div>
+                    {project.access && (
+                      <span className="inline-block bg-black text-white px-2 py-0.5 mb-2 font-mono text-[0.6rem] md:text-xs font-bold uppercase">
+                        codigo fechado
+                      </span>
+                    )}
                     <h3 className="text-lg md:text-2xl lg:text-3xl font-black text-black mb-3 pr-8">{project.title}</h3>
                     <p className="font-mono text-xs md:text-sm lg:text-base mb-4 md:mb-6 border-l-4 border-black pl-3 bg-[var(--surface-2)] py-2">
                       {project.description}
