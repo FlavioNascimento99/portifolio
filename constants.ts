@@ -134,8 +134,71 @@ export const PROJECTS: Project[] = [
       }
     ],
     color: "bg-neo-green"
+  },
+  {
+    id:           5,
+    title:        "Plataforma de Campanhas",
+    subtitle:     "Orquestracao multicanal de contato com clientes",
+    description:  "Sistema que dispara e acompanha campanhas de contato em email, RCS/SMS e chamada de voz com IA, ancoradas em datas contratuais de cada cliente.",
+    fullDescription: "PROBLEMA — o contato com a base era manual e reativo: cada janela contratual exigia alguem lembrar, montar a lista e disparar. RESTRICAO — mensagem entregue nao volta atras, e nao existe ambiente de teste que fale com cliente real. DECISAO — monolito modular em arquitetura hexagonal: o dominio nao conhece provedor nenhum, cada canal e um adapter atras de uma porta, e a composicao acontece num unico ponto, o que permitiu adicionar canal sem tocar na regra de negocio. MECANISMO — dois trilhos convivem: uma sequencia de toques em datas fixas relativas ao vencimento, e uma cadencia secundaria que dispara na abertura do email e encadeia email, RCS e uma chamada com IA ao longo de sete dias. API e worker sao entrypoints separados com deploy independente, e a fila roda em pg-boss sobre o proprio Postgres. TRADE-OFF — abri mao de um broker dedicado para nao operar mais uma peca de infra; em troca, a campanha modelo fica permanentemente pausada e campanhas reais nascem de uma copia, para que nenhum disparo aconteca por acidente.",
+    techStack:    [
+                    "TypeScript",
+                    "Fastify",
+                    "Prisma",
+                    "PostgreSQL",
+                    "pg-boss",
+                    "Arquitetura Hexagonal",
+                    "Claude API",
+                    "Twilio",
+                    "Docker",
+                  ],
+    access: {
+      kind: 'private',
+      note: 'sistema interno em producao',
+    },
+    color:        "bg-neo-yellow"
+  },
+  {
+    id:           6,
+    title:        "Gateway de Webhooks",
+    subtitle:     "Fan-out de eventos de provedor para multiplos consumidores",
+    description:  "Receptor unico de callbacks que reentrega o mesmo evento para varios sistemas internos, com retry proprio por destino.",
+    fullDescription: "PROBLEMA — o provedor externo expoe um unico slot de callback, mas tres sistemas internos precisavam dos mesmos eventos. RESTRICAO — mudar o provedor nao era opcao, e perder callback significa perder o rastro de uma mensagem entregue. DECISAO — um receptor dedicado em Fastify, em vez de fazer um dos consumidores repassar para os outros, o que acoplaria a disponibilidade de todos a um deles. MECANISMO — o gateway responde 200 imediatamente e so entao reentrega, de forma assincrona, com backoff exponencial por destino, respeitando o retry-after do consumidor e descartando 4xx que nao seja 429. Destinos sao descobertos por convencao de variavel de ambiente, entao acrescentar consumidor e restart, nao rebuild; um prefixo opcional filtra quais eventos cada um recebe. TRADE-OFF — nao existe fila duravel: um restart no meio do retry perde a tentativa. A idempotencia fica no downstream, por deduplicacao de id de mensagem, escolha consciente por simplicidade operacional.",
+    techStack:    [
+                    "TypeScript",
+                    "Fastify",
+                    "PostgreSQL",
+                    "Testcontainers",
+                    "Docker",
+                  ],
+    access: {
+      kind: 'private',
+      note: 'sistema interno em producao',
+    },
+    color:        "bg-neo-blue"
+  },
+  {
+    id:           7,
+    title:        "Plataforma de Voz",
+    subtitle:     "Chamadas de voz sobre WhatsApp controladas por API",
+    description:  "Motor de chamadas que origina e conduz audio por WhatsApp via API REST, com o audio trafegando por WebSocket ate um agente de IA.",
+    fullDescription: "PROBLEMA — a operacao dependia de um trunk SIP contratado para falar com o cliente, com custo fixo e uma stack de telefonia inteira para manter. RESTRICAO — o canal de destino nao oferece API de voz publica, e as credenciais de sessao sao insubstituiveis: perder o arquivo significa perder o numero. DECISAO — abandonar SIP e originar a chamada por HTTP, mantendo o audio num WebSocket separado do controle, o que deixou o motor de chamada independente de quem consome o audio do outro lado. MECANISMO — quatro entregaveis independentes (servidor, adaptador para a plataforma de agentes, painel e automacao de backup), audio fixado em PCM 16 bits mono a 16 kHz por imposicao do transporte, e schema idempotente que se aplica sozinho a cada boot sob advisory lock, dispensando ferramenta de migracao. TRADE-OFF — a dependencia de WhatsApp e vendorizada com correcoes locais e carrega um binario WASM, o que prende a imagem a uma base glibc e a um teto alto de memoria; em troca, o custo de telefonia saiu da conta.",
+    techStack:    [
+                    "TypeScript",
+                    "WebSocket",
+                    "WebRTC",
+                    "PostgreSQL",
+                    "WASM",
+                    "Docker",
+                  ],
+    access: {
+      kind: 'private',
+      note: 'sistema interno em producao',
+    },
+    color:        "bg-neo-pink"
   }
 ];
+
 
 export const GITHUB_LINKS: Record<number, string> = {
   1: "https://github.com/FlavioNascimento99/veritas_application",
