@@ -32,8 +32,6 @@ const GeometricShape: React.FC<GeometricShapeProps> = ({ shape, mouseX, mouseY, 
   const w = isMobile && shape.responsive?.width ? shape.responsive.width : shape.width;
   const h = isMobile && shape.responsive?.height ? shape.responsive.height : shape.height;
 
-  if (isMobile && shape.responsive?.hideOnMobile) return null;
-
   useEffect(() => {
     const handleMouseMove = () => {
       if (!ref.current || !containerRef.current) return;
@@ -56,6 +54,8 @@ const GeometricShape: React.FC<GeometricShapeProps> = ({ shape, mouseX, mouseY, 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [x, y, mouseX, mouseY, containerRef]);
+
+  if (isMobile && shape.responsive?.hideOnMobile) return null;
 
   const color = COLOR_MAP[shape.color];
   const borderWidth = shape.borderWidth ?? 3;
@@ -182,7 +182,7 @@ export const HeroPhotoComposition: React.FC<HeroPhotoCompositionProps> = ({
       ))}
 
       {/* Photo */}
-      <div className="relative z-10">
+      <div className="absolute inset-0 z-10">
         {children}
       </div>
     </div>
