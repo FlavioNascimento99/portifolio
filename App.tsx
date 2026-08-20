@@ -1,6 +1,7 @@
 import { ArrowUpRight, ChevronDown, Code2, Database, Github, Layers, Linkedin, Mail, Moon, Terminal, Sun } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { NeoBadge, NeoButton, NeoCard, ProjectModal, ScrollReveal, FloatingIcons } from './components';
+import { NeoBadge, NeoButton, NeoCard, ProjectModal, ScrollReveal, FloatingIcons, SpotifyWidget } from './components';
+import { TextAnimate } from './components/ui/TextAnimate';
 import { useRandomPhoto } from './hooks';
 import { Project } from './types';
 // import { TerminalChat } from './components/sections'; // TODO: Desenvolver J-BOT customizado
@@ -196,11 +197,14 @@ function App() {
 
         <ScrollReveal direction="up" delay={100}>
           <NeoCard color="bg-[var(--surface)]" hoverEffect={false} className="space-y-4 md:space-y-6">
-            {ABOUT_TEXT.map((paragraph, index) => (
-              <p key={index} className="font-mono text-xs md:text-sm lg:text-base leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
+            <TextAnimate
+              animation="fadeIn"
+              by="line"
+              once
+              className="font-mono text-xs md:text-sm lg:text-base leading-relaxed"
+            >
+              {ABOUT_TEXT.join('\n\n')}
+            </TextAnimate>
           </NeoCard>
         </ScrollReveal>
       </section>
@@ -518,6 +522,9 @@ function App() {
 
       {/* Floating Chat Component */}
       {/* <TerminalChat /> TODO: Ativar quando customizar o J-BOT */}
+      
+      {/* Spotify Widget */}
+      <SpotifyWidget />
       
       <style>{`
         @keyframes marquee {
