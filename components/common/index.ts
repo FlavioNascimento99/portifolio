@@ -3,3 +3,4 @@ export { ProjectModal } from './ProjectModal';
 export { ScrollReveal } from './ScrollReveal';
 export { FloatingIcons } from './FloatingIcons';
 export { SpotifyWidget } from './SpotifyWidget';
+export { HeroPhotoComposition } from './HeroPhotoComposition';
