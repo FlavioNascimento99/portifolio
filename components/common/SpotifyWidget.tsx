@@ -114,7 +114,17 @@ export const SpotifyWidget: React.FC<SpotifyWidgetProps> = ({
       >
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Music size={20} className="text-neo-green" />
+            {track.albumArt ? (
+              <motion.img
+                src={track.albumArt}
+                alt={track.album}
+                className="w-10 h-10 border-2 border-neo-green"
+                animate={track.isPlaying ? { scale: [1, 1.05, 1] } : {}}
+                transition={track.isPlaying ? { duration: 2, repeat: Infinity, ease: 'easeInOut' } : {}}
+              />
+            ) : (
+              <Music size={20} className="text-neo-green" />
+            )}
             {track.isPlaying && (
               <motion.div
                 className="absolute -top-1 -right-1 w-3 h-3 bg-neo-green rounded-full"
