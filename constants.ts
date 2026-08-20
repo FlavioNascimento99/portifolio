@@ -1,7 +1,8 @@
 import { Experience, Project, Skill } from './types';
 
-export const HERO_TEXT = "DESENVOLVEDOR DE SOFTWARE FULLSTACK.";
-export const SUB_HERO_TEXT = "DESENVOLVEDOR JAVA // SPRING BOOT // POSTGRESQL // WEB DEVELOPMENT // DESIGN DE SOFTWARE";
+export const HERO_NAME = "Flavio Nascimento";
+export const HERO_ROLE_LINES = ["Desenvolvedor", "de Software", "Fullstack"];
+export const HERO_TAGS = ["Sistemas", "Backend", "Arquitetura", "IA"];
 
 export const NAV_LINKS: { href: string; label: string }[] = [
   { href: '#about', label: 'about' },
