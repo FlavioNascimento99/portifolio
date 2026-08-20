@@ -205,7 +205,7 @@ function App() {
               WEB DEVELOPMENT
             </Highlighter>{" // "}
             <Highlighter action="underline" color="#87CEFA" isView>
-              DESIGN DE SOFTWARE
+              SYSTEM DESIGN E ARQUITETURA DE SOFTWARE
             </Highlighter>
           </p>
         </ScrollReveal>
