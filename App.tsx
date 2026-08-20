@@ -350,7 +350,9 @@ function App() {
                             />
                           </span>
                         </div>
-                        <p className="mt-2 font-mono text-xs md:text-sm text-[var(--muted)]">{exp.summary}</p>
+                        <p className="mt-2 font-mono text-xs md:text-sm text-[var(--muted)]">
+                          <HighlightedText text={exp.summary} words={EXP_HIGHLIGHTS[exp.id]?.words ?? []} />
+                        </p>
                       </button>
 
                       <div className="flex flex-wrap items-center gap-2 mt-3">
@@ -386,14 +388,14 @@ function App() {
                               </p>
 
                               <p className="font-mono text-xs md:text-sm leading-relaxed border-l-4 border-black pl-3 bg-[var(--surface-2)] py-2 mb-3">
-                                {exp.description}
+                                <HighlightedText text={exp.description} words={EXP_HIGHLIGHTS[exp.id]?.words ?? []} />
                               </p>
 
                               <ul className="space-y-2 mb-3">
                                 {exp.highlights.map(item => (
                                   <li key={item} className="flex items-start gap-2 font-mono text-xs md:text-sm">
                                     <span className="w-2 h-2 bg-[var(--on-surface)] mt-1.5 flex-shrink-0"></span>
-                                    <span>{item}</span>
+                                    <HighlightedText text={item} words={EXP_HIGHLIGHTS[exp.id]?.words ?? []} />
                                   </li>
                                 ))}
                               </ul>
@@ -546,7 +548,7 @@ function App() {
                   <div>
                     <p className="text-neo-green">$ cat status.txt</p>
                     <p className="mt-1 leading-relaxed">
-                      Aberto a novas oportunidades. Sem enrolação: respondo rápido e entrego o que combinei<span className="terminal-cursor">_</span>
+                      <Highlighter action="highlight" color="#ffd1dc" isView>Aberto a novas oportunidades</Highlighter>. Sem enrolação: <Highlighter action="underline" color="#87CEFA" isView>respondo rápido e entrego o que combinei</Highlighter><span className="terminal-cursor">_</span>
                     </p>
                   </div>
                   <div>
