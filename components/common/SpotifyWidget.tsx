@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Music, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
+import { Music, ExternalLink, Loader2 } from 'lucide-react';
 
 interface SpotifyTrack {
   name: string;
@@ -85,18 +85,39 @@ export const SpotifyWidget: React.FC<SpotifyWidgetProps> = ({
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        className={`fixed bottom-6 right-6 z-50 bg-black text-white border-4 border-neo-pink p-4 shadow-neo-lg ${className}`}
+        className={`fixed bottom-6 right-6 z-50 ${className}`}
       >
-        <div className="flex items-center gap-3">
-          <AlertCircle size={20} className="text-neo-pink" />
-          <span className="font-mono text-sm">Erro ao conectar</span>
+        <div className="bg-black text-white border-4 border-gray-600 p-4 shadow-neo-lg">
+          <div className="flex items-center gap-3">
+            <Music size={20} className="text-gray-500" />
+            <div className="text-left">
+              <p className="font-mono text-xs font-bold text-gray-500">OFFLINE</p>
+              <p className="font-mono text-sm text-gray-400">Não estou escutando nada no momento</p>
+            </div>
+          </div>
         </div>
       </motion.div>
     );
   }
 
   if (!track) {
-    return null;
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className={`fixed bottom-6 right-6 z-50 ${className}`}
+      >
+        <div className="bg-black text-white border-4 border-gray-600 p-4 shadow-neo-lg">
+          <div className="flex items-center gap-3">
+            <Music size={20} className="text-gray-500" />
+            <div className="text-left">
+              <p className="font-mono text-xs font-bold text-gray-500">OFFLINE</p>
+              <p className="font-mono text-sm text-gray-400">Não estou escutando nada no momento</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
   }
 
   return (
