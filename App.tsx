@@ -1,14 +1,13 @@
 import { ArrowUpRight, ChevronDown, Code2, Database, Github, Layers, Linkedin, Mail, Moon, Terminal, Sun } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { NeoBadge, NeoButton, NeoCard, ProjectModal, ScrollReveal, FloatingIcons, SpotifyWidget, HeroPhotoComposition } from './components';
+import { NeoBadge, NeoButton, NeoCard, ProjectModal, ScrollReveal, SpotifyWidget, Hero } from './components';
 import { TextAnimate } from './components/ui/TextAnimate';
 import { Highlighter } from './components/ui/Highlighter';
 import { HighlightedText } from './components/ui/HighlightedText';
 import { useRandomPhoto } from './hooks';
 import { Project } from './types';
-import { heroShapes } from './constants/heroShapes';
 // import { TerminalChat } from './components/sections'; // TODO: Desenvolver J-BOT customizado
-import { ABOUT_TEXT, GITHUB_LINKS, HERO_TEXT, NAV_LINKS, PROJECTS, SKILLS, SUB_HERO_TEXT, EXPERIENCES } from './constants';
+import { ABOUT_TEXT, GITHUB_LINKS, NAV_LINKS, PROJECTS, SKILLS, EXPERIENCES } from './constants';
 
 const EXP_HIGHLIGHTS: Record<number, { words: { word: string; action?: "highlight" | "underline"; color?: string }[] }> = {
   1: {
@@ -181,61 +180,7 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="hero" className="relative overflow-x-hidden pt-24 pb-8 md:pt-40 md:pb-20 min-h-[85vh] flex items-center">
-        <FloatingIcons />
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 flex flex-col md:flex-row gap-6 md:gap-12 items-center">
-        <ScrollReveal direction="left" className="flex-1 space-y-6 w-full">
-          <div className="inline-block bg-neo-pink text-black border-2 border-black px-3 py-1 font-mono font-bold text-xs md:text-sm shadow-neo-sm transform -rotate-1">
-            v0.0.3 RELEASE
-          </div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black leading-tight md:leading-none uppercase break-words text-[var(--text)] drop-shadow-[2px_2px_0_var(--pink)] md:drop-shadow-[4px_4px_0_var(--pink)]">
-            {HERO_TEXT}
-          </h1>
-          <p className="font-mono text-sm sm:text-base md:text-lg lg:text-xl bg-white text-black border-2 border-black p-3 md:p-4 shadow-neo max-w-2xl">
-            <Highlighter action="highlight" color="#ffd1dc" isView>
-              JAVA
-            </Highlighter>{" // "}
-            <Highlighter action="highlight" color="#87CEFA" isView>
-              SPRING BOOT
-            </Highlighter>{" // "}
-            <Highlighter action="highlight" color="#ffd1dc" isView>
-              POSTGRESQL
-            </Highlighter>{" // "}
-            <Highlighter action="underline" color="#FF9800" isView>
-              WEB DEVELOPMENT
-            </Highlighter>{" // "}
-            <Highlighter action="underline" color="#87CEFA" isView>
-              SYSTEM DESIGN E ARQUITETURA DE SOFTWARE
-            </Highlighter>
-          </p>
-        </ScrollReveal>
-        
-        {/* Photo Section */}
-        <ScrollReveal direction="right" delay={150} className="w-full md:w-1/3 flex justify-center mt-8 md:mt-0">
-           <HeroPhotoComposition
-             imageSrc={randomPhotoUrl || ''}
-             imageAlt="Foto pessoal aleatória"
-             shapes={heroShapes}
-             className="w-48 h-48 sm:w-56 sm:h-56 md:w-80 md:h-80"
-           >
-             <div className="absolute inset-0 border-4 border-black z-10 overflow-hidden shadow-neo-lg">
-                {randomPhotoUrl && (
-                  <img 
-                    src={randomPhotoUrl} 
-                    alt="Foto pessoal aleatória" 
-                    className="w-full h-full object-cover"
-                  />
-                )}
-             </div>
-             <div className="absolute inset-0 bg-neo-yellow border-4 border-black z-0 translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4"></div>
-             <div className="absolute -top-4 -right-4 md:-top-6 md:-right-6 bg-white text-black border-4 border-black p-2 z-20 shadow-neo font-mono font-bold text-xs md:text-sm animate-bounce">
-               System.out.println("Opa, bão?!");
-             </div>
-           </HeroPhotoComposition>
-        </ScrollReveal>
-        </div>
-      </section>
+      <Hero photoUrl={randomPhotoUrl} />
 
       <div className="border-y-4 border-black bg-neo-yellow text-black overflow-hidden py-2 md:py-3 font-mono text-xs md:text-sm lg:text-base font-bold">
         <div className="whitespace-nowrap animate-marquee">
