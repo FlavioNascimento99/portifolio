@@ -2,10 +2,45 @@ import { ArrowUpRight, ChevronDown, Code2, Database, Github, Layers, Linkedin, M
 import React, { useEffect, useState } from 'react';
 import { NeoBadge, NeoButton, NeoCard, ProjectModal, ScrollReveal, FloatingIcons, SpotifyWidget } from './components';
 import { TextAnimate } from './components/ui/TextAnimate';
+import { Highlighter } from './components/ui/Highlighter';
+import { HighlightedText } from './components/ui/HighlightedText';
 import { useRandomPhoto } from './hooks';
 import { Project } from './types';
 // import { TerminalChat } from './components/sections'; // TODO: Desenvolver J-BOT customizado
 import { ABOUT_TEXT, GITHUB_LINKS, HERO_TEXT, NAV_LINKS, PROJECTS, SKILLS, SUB_HERO_TEXT, EXPERIENCES } from './constants';
+
+const EXP_HIGHLIGHTS: Record<number, { words: { word: string; action?: "highlight" | "underline"; color?: string }[] }> = {
+  1: {
+    words: [
+      { word: "arquitetura hexagonal", action: "highlight", color: "#ffd1dc" },
+      { word: "blue-green deploy", action: "underline", color: "#87CEFA" },
+      { word: "workers", action: "highlight", color: "#FF9800" },
+      { word: "gateways", action: "highlight", color: "#FF9800" },
+      { word: "integrações com IA", action: "underline", color: "#87CEFA" },
+      { word: "Docker", action: "highlight", color: "#ffd1dc" },
+      { word: "Kubernetes", action: "highlight", color: "#87CEFA" },
+      { word: "Git Flow", action: "underline", color: "#FF9800" },
+    ],
+  },
+  2: {
+    words: [
+      { word: "identidade visual", action: "highlight", color: "#ffd1dc" },
+      { word: "microsserviços", action: "underline", color: "#87CEFA" },
+      { word: "design patterns", action: "highlight", color: "#FF9800" },
+      { word: "UI e UX", action: "underline", color: "#ffd1dc" },
+    ],
+  },
+  3: {
+    words: [
+      { word: "Java", action: "highlight", color: "#ffd1dc" },
+      { word: "Spring Boot", action: "highlight", color: "#87CEFA" },
+      { word: "Docker", action: "highlight", color: "#FF9800" },
+      { word: "Kubernetes", action: "highlight", color: "#ffd1dc" },
+      { word: "API REST", action: "underline", color: "#87CEFA" },
+      { word: "Spring Security", action: "underline", color: "#FF9800" },
+    ],
+  },
+};
 
 function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -157,7 +192,21 @@ function App() {
             {HERO_TEXT}
           </h1>
           <p className="font-mono text-sm sm:text-base md:text-lg lg:text-xl bg-white text-black border-2 border-black p-3 md:p-4 shadow-neo max-w-2xl">
-            {SUB_HERO_TEXT}
+            <Highlighter action="highlight" color="#ffd1dc" isView>
+              JAVA
+            </Highlighter>{" // "}
+            <Highlighter action="highlight" color="#87CEFA" isView>
+              SPRING BOOT
+            </Highlighter>{" // "}
+            <Highlighter action="highlight" color="#ffd1dc" isView>
+              POSTGRESQL
+            </Highlighter>{" // "}
+            <Highlighter action="underline" color="#FF9800" isView>
+              WEB DEVELOPMENT
+            </Highlighter>{" // "}
+            <Highlighter action="underline" color="#87CEFA" isView>
+              DESIGN DE SOFTWARE
+            </Highlighter>
           </p>
         </ScrollReveal>
         
@@ -197,14 +246,32 @@ function App() {
 
         <ScrollReveal direction="up" delay={100}>
           <NeoCard color="bg-[var(--surface)]" hoverEffect={false} className="space-y-4 md:space-y-6">
-            <TextAnimate
-              animation="fadeIn"
-              by="line"
-              once
-              className="font-mono text-xs md:text-sm lg:text-base leading-relaxed"
-            >
-              {ABOUT_TEXT.join('\n\n')}
-            </TextAnimate>
+            <p className="font-mono text-xs md:text-sm lg:text-base leading-relaxed">
+              Entrei em Sistemas para Internet no Instituto Federal em 2019 sem saber muito bem onde ia parar — mas o primeiro contato profissional, ainda cedo, veio através de HTML/CSS, e foi o suficiente pra virar{" "}
+              <Highlighter action="highlight" color="#ffd1dc" isView>paixão</Highlighter>.
+              Desde então sempre puxei mais pro front-end, pelo gosto de{" "}
+              <Highlighter action="underline" color="#87CEFA" isView>transformar interface em experiência de verdade</Highlighter>,
+              e ainda na graduação comecei a pegar freelas pra pequenos e médios negócios, aprendendo a tocar um projeto sozinho,{" "}
+              <Highlighter action="underline" color="#FF9800" isView>do briefing até o deploy</Highlighter>.
+            </p>
+            <p className="font-mono text-xs md:text-sm lg:text-base leading-relaxed">
+              Com o tempo, essa curiosidade foi puxando pro resto da stack. Hoje penso em{" "}
+              <Highlighter action="highlight" color="#87CEFA" isView>software de ponta a ponta</Highlighter>:
+              gosto de entender o cenário e desenhar a{" "}
+              <Highlighter action="underline" color="#FF9800" isView>arquitetura antes de sair codando</Highlighter>,
+              e é isso que guia meu trabalho — seja reconstruindo a identidade visual de sistemas internos, refatorando monólitos antigos rumo a{" "}
+              <Highlighter action="highlight" color="#ffd1dc" isView>microsserviços</Highlighter>,
+              ou desenhando workers, gateways e{" "}
+              <Highlighter action="underline" color="#87CEFA" isView>integrações com IA</Highlighter>{" "}
+              que sustentam operações inteiras por trás dos panos.
+            </p>
+            <p className="font-mono text-xs md:text-sm lg:text-base leading-relaxed">
+              No fim, o que não mudou desde 2019 foi o gosto por{" "}
+              <Highlighter action="highlight" color="#FF9800" isView>pegar um problema real e ir até o fim dele</Highlighter> —
+              do primeiro esboço em HTML até{" "}
+              <Highlighter action="underline" color="#ffd1dc" isView>um sistema em produção</Highlighter>,
+              sozinho ou em time.
+            </p>
           </NeoCard>
         </ScrollReveal>
       </section>

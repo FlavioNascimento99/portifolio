@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Auth - Copie o Code</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Courier New', monospace; 
+      background: #000; 
+      color: #fff; 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      border: 4px solid #1DB954;
+      padding: 30px;
+      background: #111;
+    }
+    h1 { color: #1DB954; margin-bottom: 20px; font-size: 18px; }
+    .code-box {
+      background: #000;
+      border: 2px solid #1DB954;
+      padding: 15px;
+      word-break: break-all;
+      margin: 15px 0;
+      font-size: 14px;
+      color: #1DB954;
+    }
+    .error { color: #ff4444; border-color: #ff4444; }
+    .btn {
+      background: #1DB954;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn:hover { background: #1ed760; }
+    .btn-copied { background: #fff; }
+    p { line-height: 1.6; font-size: 14px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>$ SPOTIFY_AUTH_CALLBACK</h1>
+    
+    <div id="error-box" class="code-box error" style="display:none;"></div>
+    
+    <div id="success-box" style="display:none;">
+      <p>Copie este code e cole no terminal:</p>
+      <div id="code-box" class="code-box"></div>
+      <button class="btn" onclick="copyCode()">COPIAR CODE</button>
+      <p style="margin-top:15px; color:#888; font-size:12px;">
+        Depois volte no terminal e cole o code para eu trocar pelo refresh_token.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const error = params.get('error');
+
+    if (error) {
+      document.getElementById('error-box').textContent = 'Erro: ' + error;
+      document.getElementById('error-box').style.display = 'block';
+    } else if (code) {
+      document.getElementById('code-box').textContent = code;
+      document.getElementById('success-box').style.display = 'block';
+    } else {
+      document.getElementById('error-box').textContent = 'Nenhum code encontrado na URL.';
+      document.getElementById('error-box').style.display = 'block';
+    }
+
+    function copyCode() {
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.querySelector('.btn');
+        btn.textContent = 'COPIADO!';
+        btn.classList.add('btn-copied');
+        setTimeout(() => {
+          btn.textContent = 'COPIAR CODE';
+          btn.classList.remove('btn-copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
