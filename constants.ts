@@ -36,21 +36,27 @@ export const PROJECTS: Project[] = [
     media: [
       {
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500',
-        alt: 'VERITAS Dashboard'
+        url: '/assets/projects/veritas/dashboard-coordenador.png',
+        alt: 'VERITAS: dashboard do coordenador com processos pendentes de distribuição'
       },
       {
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500',
-        alt: 'VERITAS Task Management'
+        url: '/assets/projects/veritas/processo-votacao.png',
+        alt: 'VERITAS: detalhe do processo com votação do colegiado'
+      },
+      {
+        type: 'image',
+        url: '/assets/projects/veritas/dashboard-estudante.png',
+        alt: 'VERITAS: dashboard do estudante com seus processos'
       }
     ],
     color:        "bg-neo-blue"
   },
   {
     id:           2,
-    title:        "Czar Managment",
+    title:        "Czar Management",
     subtitle:     "Plataforma de Gerenciamento de Projetos Ágil",
+    link:         "https://czar.contato-nascimento-dev.workers.dev/",
     description:  "Aplicação de criação e gerenciamento de serviços, pensado para um cenário de desenvolvimento de software, criando grupos, etapas, tarefas, atribuição de tarefas à outros usuários, anexo de documentos em PDF e acompanhamento do progresso.",
     fullDescription: "Czar Management é uma plataforma completa de gerenciamento de projetos desenvolvida com Ruby on Rails. Permite que equipes criem grupos de trabalho, definam etapas de projeto, criem e gerenciem tarefas, atribuam responsabilidades aos membros da equipe, compartilhem documentos em PDF e acompanhem o progresso em tempo real. O sistema foi dockerizado para facilitar deployment e utiliza SQLite3 como banco de dados local. A interface é construída com Bootstrap, oferecendo uma experiência intuitiva e responsiva. Executado em ambiente WSL para máxima flexibilidade.",
     techStack:    [
@@ -64,13 +70,56 @@ export const PROJECTS: Project[] = [
     media: [
       {
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500',
-        alt: 'Czar Management Interface'
+        url: '/assets/projects/czar-management/dashboard.png',
+        alt: 'Czar Management: dashboard com projetos recentes e tarefas atribuídas'
       },
       {
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1551454014-5d694c36fb5b?w=500',
-        alt: 'Czar Management Tasks'
+        url: '/assets/projects/czar-management/kanban.png',
+        alt: 'Czar Management: quadro kanban do projeto'
+      },
+      {
+        type: 'image',
+        url: '/assets/projects/czar-management/projeto.png',
+        alt: 'Czar Management: página do projeto com membros, métricas e tarefas'
+      }
+    ],
+    color:        "bg-neo-pink"
+  },
+  {
+    id:           8,
+    title:        "Czar Documents",
+    subtitle:     "Plataforma de Escrita, Organização e Publicação de Documentos",
+    link:         "https://czar-documents.contato-nascimento-dev.workers.dev/",
+    description:  "Editor de documentos com autosave, pastas aninhadas, tipos, compartilhamento por papel (editor ou leitor), publicação por link público e busca full-text entre documentos e pessoas.",
+    fullDescription: "Czar Documents é a base de conhecimento do ecossistema Czar. O editor rich-text em TipTap salva sozinho com autosave debounced, os documentos se organizam em pastas aninhadas carregadas sob demanda e em tipos, e o dono compartilha cada um como editor ou leitor, publica uma versão somente leitura por link público e lista o que publicou no próprio perfil. O backend é um monólito modular em Go: PostgreSQL como fonte da verdade, Elasticsearch como índice de busca derivado e reconstruível, Redis para cache e rate limit, e armazenamento compatível com S3 para imagens enviadas por URL pré-assinada. Toda autorização acontece no servidor. O frontend em React, TypeScript, TanStack Query e Tailwind CSS compartilha a mesma linguagem visual do Czar Management.",
+    techStack:    [
+                    "Go",
+                    "React",
+                    "TypeScript",
+                    "TipTap",
+                    "TanStack Query",
+                    "Tailwind CSS",
+                    "PostgreSQL",
+                    "Elasticsearch",
+                    "Redis",
+                    "Docker",
+                  ],
+    media: [
+      {
+        type: 'image',
+        url: '/assets/projects/czar-documents/documentos.png',
+        alt: 'Czar Documents: lista de documentos com pastas, tipos e visibilidade'
+      },
+      {
+        type: 'image',
+        url: '/assets/projects/czar-documents/documento.png',
+        alt: 'Czar Documents: visualização de um documento publicado'
+      },
+      {
+        type: 'image',
+        url: '/assets/projects/czar-documents/editor.png',
+        alt: 'Czar Documents: editor rich-text com autosave'
       }
     ],
     color:        "bg-neo-pink"
@@ -201,9 +250,10 @@ export const PROJECTS: Project[] = [
 
 
 export const GITHUB_LINKS: Record<number, string> = {
-  1: "https://github.com/FlavioNascimento99/veritas_application",
+  1: "https://github.com/FlavioNascimento99/veritas",
   2: "https://github.com/FlavioNascimento99/czar_management",
   3: "https://github.com/FlavioNascimento99/broadcast_application",
+  8: "https://github.com/FlavioNascimento99/czar-documents",
 };
 
 export const EXPERIENCES: Experience[] = [

@@ -37,6 +37,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
   };
 
   const currentMedia = project.media?.[currentMediaIndex];
+  const githubLink = GITHUB_LINKS[project.id];
+  const linkButtonClass = `
+    text-black border-4 border-black px-2 md:px-3 lg:px-4 py-0.5 md:py-1 lg:py-2
+    font-mono font-bold uppercase text-[0.6rem] md:text-xs lg:text-xs
+    shadow-neo hover:shadow-none transition-all active:shadow-none
+    text-center block flex-1
+  `;
 
   return (
     <>
@@ -77,13 +84,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
           <div className="flex flex-col items-center justify-center gap-1 md:gap-2 lg:gap-3 order-2 lg:order-1">
             {currentMedia ? (
               <>
-                <div className="relative w-full aspect-square bg-[var(--input)] border-4 border-black overflow-hidden max-h-56 md:max-h-72 lg:max-h-full">
+                <div className="relative w-full aspect-[16/10] bg-[var(--input)] border-4 border-black overflow-hidden">
                   {currentMedia.type === 'image' ? (
                     <img
                       src={currentMedia.url}
                       alt={currentMedia.alt || project.title}
                       loading="lazy"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover object-top"
                     />
                   ) : (
                     <video
@@ -130,7 +137,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
                 )}
               </>
             ) : (
-              <div className="w-full aspect-square bg-[var(--input)] border-4 border-black flex items-center justify-center">
+              <div className="w-full aspect-[16/10] bg-[var(--input)] border-4 border-black flex items-center justify-center">
                 <span className="font-mono font-bold text-[var(--muted)] text-xs md:text-sm">Sem mídia</span>
               </div>
             )}
@@ -183,20 +190,19 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
               </div>
             )}
 
-            {(project.link || GITHUB_LINKS[project.id]) && (
-              <a
-                href={project.link || GITHUB_LINKS[project.id]}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  bg-neo-green text-black border-4 border-black px-2 md:px-3 lg:px-4 py-0.5 md:py-1 lg:py-2
-                  font-mono font-bold uppercase text-[0.6rem] md:text-xs lg:text-xs
-                  shadow-neo hover:shadow-none transition-all active:shadow-none
-                  text-center block
-                "
-              >
-                {project.link ? 'Ver site →' : 'GitHub →'}
-              </a>
+            {(project.link || githubLink) && (
+              <div className="flex flex-col sm:flex-row gap-2">
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className={`bg-neo-green ${linkButtonClass}`}>
+                    Ver site →
+                  </a>
+                )}
+                {githubLink && (
+                  <a href={githubLink} target="_blank" rel="noopener noreferrer" className={`bg-neo-blue ${linkButtonClass}`}>
+                    GitHub →
+                  </a>
+                )}
+              </div>
             )}
           </div>
         </div>

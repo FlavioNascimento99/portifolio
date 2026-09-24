@@ -25,9 +25,10 @@ Um portfólio web em estilo **neobrutal** showcaseando meus projetos e habilidad
 Introdução com informações sobre quem sou e minhas principais tecnologias.
 
 ### Projects (Deployed_Modules)
-4 projetos principais showcaseando experiência em:
+5 projetos principais showcaseando experiência em:
 - **VERITAS** - Aplicação Java/Spring Boot para gestão de processos universitários
 - **Czar Management** - Sistema de gerenciamento em Ruby on Rails
+- **Czar Documents** - Plataforma de escrita e publicação de documentos (Go + React)
 - **Broadcast Application** - Plataforma Event-Driven com Pub/Sub em tempo real (React + Node.js + Go)
 - **Elettra Landing Page** - Landing page institucional para Engenharia & Soluções
 
